@@ -53,4 +53,11 @@ class PHPServerTest extends \Codeception\TestCase\Test
         )->equals($expectedCommand);
     }
 
+    public function testServerEnv()
+    {
+        $this->container->get('taskServer', ['8000'])
+            ->env(['FOO' =>  'BAR'])
+            ->run();
+        verify($_ENV['FOO'])->equals('BAR');
+    }
 }
